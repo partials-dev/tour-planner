@@ -1,0 +1,21 @@
+<template name="route">
+  <h3> Route </h3>
+  <label>
+    Origin
+    <input id="origin" placeholder="{{defaultOrigin}}">
+  </label>
+  <br>
+  <label>
+    Destination
+    <input id="destination" placeholder="{{defaultDestination}}">
+  </label>
+  <br>
+  <button id='update-map'>Update</button>
+  <br>
+
+  {{> map src=mapSrc}}
+  <br>
+  <label id='distance'>
+    Distance: {{distance}} miles
+  </label>
+</template>

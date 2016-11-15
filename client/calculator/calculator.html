@@ -1,0 +1,24 @@
+<template name="calculator">
+  <h3>Tour Details</h3>
+  {{#each sections}}
+    {{> calculatorSection}}
+  {{/each}}
+
+  <h3>Cost Results</h3>
+
+  <label id="room-and-board-cost">
+    {{roomAndBoardCost}}
+  </label>
+  <br>
+  <label id="hired-gun-cost">
+    {{hiredGunCost}}
+  </label>
+  <br>
+  <label id="travel-cost">
+    {{travelCost}}
+  </label>
+  <br><br>
+  <label id="total-cost">
+    {{totalCost}}
+  </label>
+</template>

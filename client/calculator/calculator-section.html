@@ -1,0 +1,10 @@
+<template name="calculatorSection">
+  <h4>{{heading}}</h4>
+  {{#each inputs}}
+    <label>
+      {{description}}
+      <input id="{{toId description}}" value="{{defaultValue}}">
+    </label>
+    <br>
+  {{/each}}
+</template>
