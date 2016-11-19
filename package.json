@@ -4,6 +4,8 @@
   "description": "A small Meteor app for sharing cooking duties among friends or family.",
   "main": "n/a",
   "dependencies": {
+    "babel-runtime": "^6.18.0",
+    "bcrypt": "^0.8.7",
     "json-stringify-safe": "^5.0.1",
     "lodash.camelcase": "^4.3.0",
     "node-fetch": "^1.6.3"

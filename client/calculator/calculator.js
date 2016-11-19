@@ -2,9 +2,20 @@ import camelCase from 'lodash.camelcase'
 
 const values = {}
 
+function unwrap (reactiveVarDictionary) {
+  const keys = Object.keys(reactiveVarDictionary)
+  function transferProperty (result, property) {
+    const reactiveVar = values[property]
+    result[property] = reactiveVar.get()
+    return result
+  }
+  return keys.reduce(transferProperty, {})
+}
+
 function toId (description) {
   return description.replace(/ /g, '-').toLowerCase()
 }
+
 const itineraryInputs = [
   {
     description: 'Days gone on tour',
@@ -80,15 +91,14 @@ const sections = [
 ]
 
 function roomAndBoardCost () {
-  const { values, housingCostPerNight, numberOfMembersOnTour, perDiem, daysGoneOnTour } = getInputValues()
+  const { housingCostPerNight, numberOfMembersOnTour, perDiem, daysGoneOnTour } = unwrap(values)
   const room = daysGoneOnTour * housingCostPerNight
   const memberBoard = daysGoneOnTour * numberOfMembersOnTour * perDiem
-  debugger
   return room + memberBoard
 }
 
 function hiredGunCost () {
-  const { daysGoneOnTour, numberOfHiredGuns, perDiem, numberOfGigs, payPerGig } = getInputValues()
+  const { daysGoneOnTour, numberOfHiredGuns, perDiem, numberOfGigs, payPerGig } = unwrap(values)
   const hiredGunBoard = daysGoneOnTour * numberOfHiredGuns * perDiem
   const hiredGunPay = numberOfGigs * numberOfHiredGuns * payPerGig
   return hiredGunBoard + hiredGunPay
@@ -96,19 +106,17 @@ function hiredGunCost () {
 
 function travelCost () {
   const miles = Session.get('distance')
-  const { numberOfVehicles, averageMpgForAllVehicles, dollarsPerGallonOfGas } = getInputValues()
+  const { numberOfVehicles, averageMpgForAllVehicles, dollarsPerGallonOfGas } = unwrap(values)
   const gallonsUsed = (numberOfVehicles * miles) / averageMpgForAllVehicles
   return gallonsUsed * dollarsPerGallonOfGas
 }
 
 function totalCost () {
-  return roomAndBoardCost() + hiredGunCost + travelCost
+  return roomAndBoardCost() + hiredGunCost() + travelCost()
 }
 
 Template.calculator.helpers({
-  sections () {
-    return sections
-  },
+  sections,
   roomAndBoardCost,
   hiredGunCost,
   travelCost,
@@ -116,9 +124,7 @@ Template.calculator.helpers({
 })
 
 Template.calculatorSection.helpers({
-  toId (description) {
-    return toId(description)
-  }
+  toId
 })
 
 function getInputValues () {
@@ -129,25 +135,32 @@ function getInputValues () {
   allInputs.forEach(input => {
     const id = toId(input.description)
     const variableName = camelCase(id)
-    const value = $('#' + id).val()
+    const value = $('#' + id).val() || input.defaultValue
     values[variableName] = parseFloat(value)
   })
   return values
 }
 
-//const allInputs = sections.reduce((inputs, section) => {
-  //return inputs.concat(section.inputs)
-//}, [])
-                              
-//const events = {}
+const events = {}
+const allInputs = sections.reduce((allInputs, section) => {
+  return allInputs.concat(section.inputs)
+}, [])
 
-//const calculatorEvents = allInputs.map({ description } => {
-  //const id = toId(description)
-  //const variableName = camelCase(id)
-  //const eventSelector = `input ${id}`
-  //events[eventSelector] = function (e) {
-    //values[variableName] = e.target.value
-  //}
-//})
+function isNumeric(n) {
+  return !isNaN(parseFloat(n)) && isFinite(n);
+}
 
-//Template.calculator.events(events)
+const calculatorEvents = allInputs.forEach(input => {
+  const { description, defaultValue } = input
+  const id = toId(description)
+  const variableName = camelCase(id)
+  const eventSelector = `input #${id}`
+  values[variableName] = new ReactiveVar(defaultValue)
+  events[eventSelector] = function (e) {
+    if (isNumeric(e.target.value)) {
+      values[variableName].set(e.target.value)
+    }
+  }
+})
+
+Template.calculator.events(events)
