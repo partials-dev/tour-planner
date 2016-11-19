@@ -1,23 +1,16 @@
 <template name="route">
-  <div>
-    <h3> Route </h3>
-    <label>
-      Origin
-      <input id="origin" placeholder="{{defaultOrigin}}">
-    </label>
-    <br>
-    <label>
-      Destination
-      <input id="destination" placeholder="{{defaultDestination}}">
-    </label>
-    <br>
-    <button id='update-map'>Update</button>
-    <br>
-
-    {{> map src=mapSrc}}
-    <br>
-    <label id='distance'>
-      Distance: {{distance}} miles
-    </label>
+  <div class="{{materialCard}}" style="width: 100%;">
+    <div style="padding-left: 0; padding-right: 0; padding-top: 0;" class="{{materialCardTitle}}">
+      {{> map}}
+      <h2 style="position: absolute; background: white; width: 100%;" class="{{materialCardTitleText}}">{{distance}}</h2>
+    </div>
+    <div class="{{materialCardSupportingText}}">
+      {{> materialTextInput id="origin" label="Origin" defaultValue=defaultOrigin}}
+      <br>
+      {{> materialTextInput id="destination" label="Destination" defaultValue=defaultDestination}}
+    </div>
+    <div class="{{materialCardActions}}">
+      <a class="{{materialButton}}" id='update-map'>Update</a>
+    </div>
   </div>
 </template>

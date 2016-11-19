@@ -40,7 +40,7 @@ Template.route.helpers({
   distance () {
     const distance = Session.get('distance')
     if (distance) {
-      return distance.toFixed(1)
+      return `Distance: ${distance.toFixed(1)} miles`
     }
   },
   defaultOrigin () {
@@ -63,7 +63,7 @@ Template.route.events({
   }
 })
 
-Template.route.onCreated(() => {
+Template.map.onRendered(() => {
   const apiKey = 'AIzaSyDPLvgIuiBMSj5wpOM3RDwxEr5UW9i0H3U'
   const callbackName = 'initMap'
   const googleMapsApiSrc = `https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=${callbackName}`

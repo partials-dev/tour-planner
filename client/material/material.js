@@ -4,3 +4,6 @@ Template.registerHelper('materialCardSupportingText', 'mdl-card__supporting-text
 Template.registerHelper('materialCardActions', 'mdl-card__actions')
 Template.registerHelper('materialCardBorder', 'mdl-card--border')
 Template.registerHelper('materialGrid', 'mdl-grid')
+Template.registerHelper('materialButton', 'mdl-button mdl-button--colored mdl-js-button mdl-js-ripple-effect')
+Template.registerHelper('materialCardTitleText', 'mdl-card__title-text')
+Template.registerHelper('materialCardTitle', 'mdl-card__title')

@@ -1,9 +1,11 @@
 <template name="calculatorSection">
   <div class="{{materialCard}} {{materialCell 6}}">
-    {{> materialCardTitle text=heading }}
+    <div class="{{materialCardTitle}}">
+      <h2 class="{{materialCardTitleText}}">{{heading}}</h2>
+    </div>
     <div class="{{materialCardSupportingText}}" style="min-height: 201px">
       {{#each inputs}}
-        {{>materialNumericInput id=id label=description defaultValue=defaultValue}}
+      {{>materialNumericInput id=id label=description defaultValue=defaultValue}}
         <br>
       {{/each}}
     </div>

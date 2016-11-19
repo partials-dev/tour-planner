@@ -52,7 +52,7 @@ const roomAndBoardInputs = [
 const travelInputs = [
   {
     description: 'Number of vehicles',
-    defaultValue: 2
+    defaultValue: 1 
   },
   {
     description: 'Average mpg for all vehicles',
@@ -60,14 +60,14 @@ const travelInputs = [
   },
   {
     description: 'Dollars per gallon of gas',
-    defaultValue: 10
+    defaultValue: 2.5
   }
 ]
 
 const hiredGunInputs = [
   {
     description: 'Number of hired guns',
-    defaultValue: 2
+    defaultValue: 0
   },
   {
     description: 'Pay per gig',

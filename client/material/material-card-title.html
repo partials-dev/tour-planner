@@ -1,5 +1,6 @@
 <template name="materialCardTitle">
   <div class="mdl-card__title">
-    <h2 class="mdl-card__title-text">{{text}}</h2>
+    {{> UI.contentBlock}}
+    <h2 class="mdl-card__title-text" style="{{titleStyle}}">{{text}}</h2>
   </div>
 </template>
