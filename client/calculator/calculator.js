@@ -100,11 +100,12 @@ function totalCost () {
   return roomAndBoardCost() + hiredGunsCost() + travelCost()
 }
 
+function payout () {
+  return values.totalPayout.get()
+}
+
 function profit () {
-  payout = values.totalPayout.get()
-  if payout {
-    return `(Profit: $${payout - totalCost})`
-  }
+  return payout() - totalCost()
 }
 
 const sections = [
@@ -136,6 +137,7 @@ Template.calculator.helpers({
   travelCost,
   totalCost,
   profit,
+  payout,
   round 
 })
 
@@ -177,7 +179,7 @@ const calculatorEvents = allInputs.forEach(input => {
   values[variableName] = new ReactiveVar(defaultValue)
   events[eventSelector] = function (e) {
     if (isNumeric(e.target.value)) {
-      values[variableName].set(e.target.value)
+      values[variableName].set(parseFloat(e.target.value))
     }
   }
 })

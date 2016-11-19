@@ -26,7 +26,12 @@
     <br><br>
     <label id="total-cost">
       Total:
-      ${{round totalCost}} {{profit}}
+      ${{round totalCost}}
     </label>
+    {{#if payout}}
+      <label id="profit">
+       (Profit: ${{round profit}})
+      </label>
+    {{/if}}
   </div>
 </template>
