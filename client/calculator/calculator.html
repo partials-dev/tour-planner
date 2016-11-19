@@ -1,28 +1,32 @@
 <template name="calculator">
-  <h3>Tour Details</h3>
-  {{#each sections}}
-    {{> calculatorSection}}
-  {{/each}}
+  <div>
+    <h3>Tour Details</h3>
+    <div class="{{materialGrid}}">
+      {{#each sections}}
+        {{> calculatorSection}}
+      {{/each}}
+    </div>
 
-  <h3>Cost Results</h3>
+    <!--<h3>Cost Results</h3>-->
 
-  <label id="room-and-board-cost">
-    Room and board:
-    ${{roomAndBoardCost}}
-  </label>
-  <br>
-  <label id="hired-gun-cost">
-    Hired guns:
-    ${{hiredGunCost}}
-  </label>
-  <br>
-  <label id="travel-cost">
-    Travel:
-    ${{travelCost}}
-  </label>
-  <br><br>
-  <label id="total-cost">
-    Total:
-    ${{totalCost}}
-  </label>
+    <!--<label id="room-and-board-cost">-->
+      <!--Room and board:-->
+      <!--${{round roomAndBoardCost}}-->
+    <!--</label>-->
+    <!--<br>-->
+    <!--<label id="hired-gun-cost">-->
+      <!--Hired guns:-->
+      <!--${{round hiredGunCost}}-->
+    <!--</label>-->
+    <!--<br>-->
+    <!--<label id="travel-cost">-->
+      <!--Travel:-->
+      <!--${{round travelCost}}-->
+    <!--</label>-->
+    <br><br>
+    <label id="total-cost">
+      Total:
+      ${{round totalCost}}
+    </label>
+  </div>
 </template>

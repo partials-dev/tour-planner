@@ -1,10 +1,16 @@
 <template name="calculatorSection">
-  <h4>{{heading}}</h4>
-  {{#each inputs}}
-    <label>
-      {{description}}
-      <input id="{{toId description}}" value="{{defaultValue}}">
-    </label>
-    <br>
-  {{/each}}
+  <div class="{{materialCard}} {{materialCell 6}}">
+    {{> materialCardTitle text=heading }}
+    <div class="{{materialCardSupportingText}}" style="min-height: 201px">
+      {{#each inputs}}
+        {{>materialNumericInput id=id label=description defaultValue=defaultValue}}
+        <br>
+      {{/each}}
+    </div>
+    {{#if cost}}
+    <div class="{{materialCardActions}}">
+        Cost: ${{round cost}}
+      </div>
+    {{/if}}
+  </div>
 </template>

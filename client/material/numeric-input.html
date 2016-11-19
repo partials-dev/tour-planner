@@ -1,0 +1,7 @@
+<template name="materialNumericInput">
+  <span class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label">
+    <input class="mdl-textfield__input" type="text" pattern="-?[0-9]*(\.[0-9]+)?" id="{{id}}" value="{{defaultValue}}">
+    <label class="mdl-textfield__label" for="{{id}}">{{label}}</label>
+    <span class="mdl-textfield__error">Needs to be a number</span>
+  </span>
+</template>

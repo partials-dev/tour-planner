@@ -2,6 +2,10 @@ import camelCase from 'lodash.camelcase'
 
 const values = {}
 
+function round (n) {
+  return +n.toFixed(2)
+}
+
 function unwrap (reactiveVarDictionary) {
   const keys = Object.keys(reactiveVarDictionary)
   function transferProperty (result, property) {
@@ -71,25 +75,6 @@ const hiredGunInputs = [
   }
 ]
 
-const sections = [
-  {
-    heading: 'Itinerary',
-    inputs: itineraryInputs
-  },
-  {
-    heading: 'Room And Board',
-    inputs: roomAndBoardInputs
-  },
-  {
-    heading: 'Travel',
-    inputs: travelInputs
-  },
-  {
-    heading: 'Hired Guns',
-    inputs: hiredGunInputs
-  }
-]
-
 function roomAndBoardCost () {
   const { housingCostPerNight, numberOfMembersOnTour, perDiem, daysGoneOnTour } = unwrap(values)
   const room = daysGoneOnTour * housingCostPerNight
@@ -97,7 +82,7 @@ function roomAndBoardCost () {
   return room + memberBoard
 }
 
-function hiredGunCost () {
+function hiredGunsCost () {
   const { daysGoneOnTour, numberOfHiredGuns, perDiem, numberOfGigs, payPerGig } = unwrap(values)
   const hiredGunBoard = daysGoneOnTour * numberOfHiredGuns * perDiem
   const hiredGunPay = numberOfGigs * numberOfHiredGuns * payPerGig
@@ -112,19 +97,45 @@ function travelCost () {
 }
 
 function totalCost () {
-  return roomAndBoardCost() + hiredGunCost() + travelCost()
+  return roomAndBoardCost() + hiredGunsCost() + travelCost()
 }
+
+const sections = [
+  {
+    heading: 'Itinerary',
+    inputs: itineraryInputs
+  },
+  {
+    heading: 'Room And Board',
+    inputs: roomAndBoardInputs,
+    cost: roomAndBoardCost
+  },
+  {
+    heading: 'Travel',
+    inputs: travelInputs,
+    cost: travelCost
+  },
+  {
+    heading: 'Hired Guns',
+    inputs: hiredGunInputs,
+    cost: hiredGunsCost
+  }
+]
 
 Template.calculator.helpers({
   sections,
   roomAndBoardCost,
-  hiredGunCost,
+  hiredGunsCost,
   travelCost,
-  totalCost
+  totalCost,
+  round 
 })
 
 Template.calculatorSection.helpers({
-  toId
+  id () {
+    return toId(this.description)
+  },
+  round
 })
 
 function getInputValues () {

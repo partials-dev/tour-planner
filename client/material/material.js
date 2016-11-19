@@ -1,0 +1,6 @@
+Template.registerHelper('materialCard', 'mdl-card mdl-shadow--2dp')
+Template.registerHelper('materialCell', (n) => `mdl-cell mdl-cell--${n}-col`)
+Template.registerHelper('materialCardSupportingText', 'mdl-card__supporting-text')
+Template.registerHelper('materialCardActions', 'mdl-card__actions')
+Template.registerHelper('materialCardBorder', 'mdl-card--border')
+Template.registerHelper('materialGrid', 'mdl-grid')

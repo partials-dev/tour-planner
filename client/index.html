@@ -12,7 +12,13 @@
 </head>
 
 <body>
-  {{> route}}
-  {{> calculator}}
+  <div class="{{materialGrid}}">
+    <div class="{{materialCell 6}}">
+      {{> calculator}}
+    </div>
+    <div class="{{materialCell 6}}">
+      {{> route}}
+    </div>
+  </div>
 </body>
 
