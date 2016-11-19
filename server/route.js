@@ -14,15 +14,5 @@ Meteor.methods({
     const inches = meters * 39.370
     const miles = inches / 63360
     return miles
-    //return fetch(url).then(data => data.json()).then(json => {
-      //console.log(`Fetched ${JSON.stringify(json)}`)
-      //const meters = json.rows[0].elements[0].distance.value
-      //const inches = meters * 39.370
-      //const miles = inches / 63360
-      //console.log(`Got ${miles} miles`)
-      //return miles
-    //}).catch(err => {
-      //console.log(`Got err fetching miles: ${err}`)
-    //})
   }
 })
