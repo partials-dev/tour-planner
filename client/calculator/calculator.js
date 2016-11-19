@@ -100,6 +100,13 @@ function totalCost () {
   return roomAndBoardCost() + hiredGunsCost() + travelCost()
 }
 
+function profit () {
+  payout = values.totalPayout.get()
+  if payout {
+    return `(Profit: $${payout - totalCost})`
+  }
+}
+
 const sections = [
   {
     heading: 'Itinerary',
@@ -128,6 +135,7 @@ Template.calculator.helpers({
   hiredGunsCost,
   travelCost,
   totalCost,
+  profit,
   round 
 })
 
